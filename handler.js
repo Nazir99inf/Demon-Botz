@@ -848,8 +848,8 @@ module.exports = {
                 isBannedTime: false,
                 mute: false,
                 listStr: {},
-                sWelcome: 'Hai, @user!\nSelamat datang di grup @subject\n\n@desc',
-                sBye: 'Selamat tinggal @user!',
+                sWelcome: '乂 Welcome, @user!\nSelamat datang di grup: @subject\n\n Deskripsi @desc',
+                sBye: 'Selamat tinggal👋 @user!',
                 sPromote: '',
                 sDemote: '',
                 delete: false, 
@@ -876,7 +876,7 @@ module.exports = {
                 antilinktt: false, 
                 antilinkttnokick: false, 
                 antibot: false, 
-                rpg: false, 
+                rpg: true, 
             }
             let memgc = global.db.data.chats[m.chat].memgc[m.sender]
             if (typeof memgc !== 'object') global.db.data.chats[m.chat].memgc[m.sender] = {}
@@ -1180,7 +1180,7 @@ module.exports = {
                 if (chat.welcome) {
                     let groupMetadata = await this.groupMetadata(id) || (conn.chats[id] || {}).metadata
                     for (let user of participants) {
-                        let pp = 'https://btch.pages.dev/file/70e8de9b1879568954f09.jpg'
+                        let pp = 'https://telegra.ph/file/320b066dc81928b782c7b.png'
                         try {
                              pp = await this.profilePictureUrl(user, 'image')
                         } catch (e) {
@@ -1192,10 +1192,10 @@ module.exports = {
                             contextInfo: {
 			    mentionedJid: [user],
                             externalAdReply: {  
-                            title: global.wm,
-                            body: '',
+                            title: "Notification Welcome/Lave",
+                            body: '© Nazir',
                             thumbnailUrl: pp,
-                            sourceUrl: 'https://api.botcahx.eu.org',
+                            sourceUrl: 'https://wa.me/6285822146627?text=hallo+word',
                             mediaType: 1,
                             renderLargerThumbnail: true 
                             }}}, { quoted: null })
