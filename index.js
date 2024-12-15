@@ -30,8 +30,8 @@ async function startServer() {
       res.setHeader('Content-Type', 'application/json');
       const data = {
         status: 'true',
-        message: 'Bot Successfully Activated!',
-        author: 'BOTCAHX'
+        message: 'Demon Botz Sucses Conecting',
+        author: 'Nazir'
       };
       const result = {
         response: data
