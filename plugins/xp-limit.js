@@ -13,10 +13,10 @@ let handler = async (m) => {
                             }
                           }
                         }
-m.reply(`${global.db.data.users[who].limit} Limit Tersisaಥ_ಥ`)
+m.reply(`${global.db.data.users[who].limit} Kini Energy/Limit Tersisa`)
 
 }
 handler.help = ['limit [@user]']
 handler.tags = ['xp']
-handler.command = /^(limit)$/i
+handler.command = ["limit" ,"energy"]
 module.exports = handler
