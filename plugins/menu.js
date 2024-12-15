@@ -10,11 +10,13 @@ const {
     getContentType 
 } = require('@adiwajshing/baileys')
 
-process.env.TZ = 'Asia/Jakarta'
+process.env.TZ = 'Asia/Makassar'
 let fs = require('fs')
 let path = require('path')
+let PhoneNumber = require("awesome-phonenumber")
 let fetch = require('node-fetch')
 let moment = require('moment-timezone')
+let os = require("os")
 let levelling = require('../lib/levelling')
 let arrayMenu = ['all', 'main', 'downloader', 'rpg', 'rpgG', 'sticker', 'advanced', 'xp', 'fun', 'game', 'github', 'group', 'image', 'nsfw', 'info', 'internet', 'islam', 'kerang', 'maker', 'owner', 'voice', 'quotes', 'store', 'stalk', 'shortlink', 'tools', 'anonymous', ''];
 
@@ -53,18 +55,31 @@ const allTags = {
 const defaultMenu = {
     before: `
 Hi %name
-I am an automated system (WhatsApp Bot) that can help to do something, search and get data / information only through WhatsApp.
+Welcome to Dashboard Bot !
 
-◦ *Library:* Baileys
-◦ *Function:* Assistant
+*–  I N T R O  - D U C T I O N*
 
-┌  ◦ Uptime : %uptime
-│  ◦ Tanggal : %date
-│  ◦ Waktu : %time
-└  ◦ Prefix Used : *[ %p ]*
-`.trimStart(),
-    header: '┌  ◦ *%category*',
-    body: '│  ◦ %cmd %islimit %isPremium',
+ my name is Demon
+ your virtual assistant *( WhatsApp bot )*, who will help you in many ways on WhatsApp.
+ 
+ –  *I N F O - B O T*
+
+┌  ◦  Language : Javascript
+│  ◦  Library :@WhiskeySocket/baileys
+│  ◦  Wa-web Version :2, 3000, 1017531287
+│  ◦  Time : %time
+│  ◦  Uptime : %uptime
+└  ◦  Browsers : Microsoft Edge(Windows)
+
+*– I N F O - U S E R*
+
+┌  ◦  Name : %name
+│  ◦  Device : Android
+└  ◦  Status : Free User
+
+If you find a bug in this bot, please contact the bot owner.`.trimStart(),
+    header: '┌⊑ *# %category* ⊒',
+    body: '│⚡ %cmd %islimit %isPremium',
     footer: '└  ',
     after: `*Note:* Ketik .menu <category> untuk melihat menu spesifik\nContoh: .menu tools`
 }
@@ -76,7 +91,6 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
         let { min, xp, max } = levelling.xpRange(level, global.multiplier)
         let name = `@${m.sender.split`@`[0]}`
         let teks = args[0] || ''
-        
         let d = new Date(new Date + 3600000)
         let locale = 'id'
         let date = d.toLocaleDateString(locale, {
@@ -90,7 +104,6 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
             minute: 'numeric',
             second: 'numeric'
         })
-
         let _uptime = process.uptime() * 1000
         let uptime = clockString(_uptime)
         
@@ -106,13 +119,13 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
         })
 
         if (!teks) {
-            let menuList = `${defaultMenu.before}\n\n┌  ◦ *DAFTAR MENU*\n`
+            let menuList = `${defaultMenu.before}\n\n┏━ ⊑ *DAFTAR MENU* ⊒\n`
             for (let tag of arrayMenu) {
                 if (tag && allTags[tag]) {
                     menuList += `│  ◦ ${_p}menu ${tag}\n`
                 }
             }
-            menuList += `└  \n\n${defaultMenu.after}`
+            menuList += `┗━━━━━━━━━━━━━━ \n\n${defaultMenu.after}`
 
             let replace = {
                 '%': '%',
@@ -136,8 +149,8 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
                         mediaType: 1,
                         previewType: 0,
                         renderLargerThumbnail: true,
-                        thumbnailUrl: 'https://telegra.ph/file/3a34bfa58714bdef500d9.jpg',
-                        sourceUrl: 'https://whatsapp.com/channel/0029Va8ZH8fFXUuc69TGVw1q'
+                        thumbnailUrl: 'https://api.betabotz.eu.org/api/tools/get-upload?id=f/oz8ts760.jpg',
+                        sourceUrl: 'https://chat.whatsapp.com/Fb1V5mV2qIKILLPXC66clV'
                     }
                 }, 
                 mentions: [m.sender]
@@ -209,8 +222,8 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
                         mediaType: 1,
                         previewType: 0,
                         renderLargerThumbnail: true,
-                        thumbnailUrl: 'https://telegra.ph/file/3a34bfa58714bdef500d9.jpg',
-                        sourceUrl: 'https://whatsapp.com/channel/0029Va8ZH8fFXUuc69TGVw1q'
+                        thumbnailUrl: 'https://api.betabotz.eu.org/api/tools/get-upload?id=f/oz8ts760.jpg',
+                        sourceUrl: 'https://chat.whatsapp.com/Fb1V5mV2qIKILLPXC66clV'
                     }
                 }, 
                 mentions: [m.sender]
@@ -221,7 +234,6 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
         console.error(e)
     }
 }
-
 handler.help = ['menu']
 handler.tags = ['main']
 handler.command = /^(menu|help)$/i
@@ -235,4 +247,4 @@ function clockString(ms) {
     let m = Math.floor(ms / 60000) % 60
     let s = Math.floor(ms / 1000) % 60
     return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-}
+    }
