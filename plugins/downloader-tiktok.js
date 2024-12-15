@@ -9,26 +9,26 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
         m.reply(wait);      
 
         try {
-            const response = await axios.get(`https://api.botcahx.eu.org/api/dowloader/tiktok?url=${text}&apikey=${btc}`);
+            const response = await axios.get(`https://api.siputzx.my.id/api/tiktok?url=${text}`);
             const res = response.data.result;      
             var { video, title, title_audio, audio } = res;
             if (!video[0]) {
                 throw eror
             }
-            let capt = `乂 *T I K T O K*\n\n`;
+            let capt = `乂 *T I K T O K   D O W N L O A D E R*\n\n`;
             capt += `◦ *Title* : ${title}\n`;
             capt += `\n`;   
                  
             if (video.length > 1) {
                 for (let v of video) {
-                    await conn.sendFile(m.chat, v, null, capt, m);
+                    conn.sendFile(m.chat, v, null, capt, m);
                 }
             } else {
-                await conn.sendFile(m.chat, video[0], null, capt, m);
+                conn.sendFile(m.chat, video[0], null, capt, m);
             }
 
             if (!audio[0]) {
-                await conn.reply(m.chat, "_Audio tidak tersedia!_", m);
+                conn.reply(m.chat, "_Audio tidak tersedia!_", m);
             } else {
                 conn.sendMessage(m.chat, { audio: { url: audio[0] }, mimetype: 'audio/mpeg' }, { quoted: m });
             }
