@@ -1,27 +1,48 @@
-global.owner = ['62895331520602']  
-global.mods = ['62895331520602'] 
-global.prems = ['62895331520602']
-global.nameowner = 'Tio'
-global.numberowner = '62895331520602' 
+global.owner = ['6285822146627']  
+global.mods = ['6285822146627'] 
+global.prems = ['6285822146627']
+global.nameowner = 'Nazir'
+global.numberowner = '6285822146627' 
 global.mail = 'support@tioprm.eu.org' 
 global.gc = 'https://chat.whatsapp.com/CP5mV2D9IO730HpBgmkuyi'
 global.instagram = 'https://instagram.com/prm2.0'
-global.wm = '© Tio'
+global.wm = 'Success Reslut - © Nazir'
 global.wait = '_*Tunggu sedang di proses...*_'
 global.eror = '_*Server Error*_'
 global.stiker_wait = '*⫹⫺ Stiker sedang dibuat...*'
 global.packname = 'Made With'
-global.author = 'Bot WhatsApp'
+global.author = 'YouKnowZir | 6285822146627'
 global.autobio = false // Set true untuk mengaktifkan autobio
 global.maxwarn = '3' // Peringatan maksimum
-global.antiporn = true // Auto delete pesan porno (bot harus admin)
-
+global.antiporn = false // Auto delete pesan porno (bot harus admin)
+global.fakestatus = (txt) => {
+  return {
+    key: {
+      remoteJid: "0@s.whatsapp.net",
+      participant: "0@s.whatsapp.net",
+      id: "",
+    },
+    message: {
+      conversation: txt,
+    },
+  };
+};
+global.fkontak = {
+  key: {
+    remoteJid: "0@s.whatsapp.net",
+    participant: "0@s.whatsapp.net",
+    id: "",
+  },
+  message: {
+    conversation: `*Nazir*`,
+  },
+};
 //INI WAJIB DI ISI!//
 global.btc = 'YOUR_APIKEY_HERE' 
 //Daftar terlebih dahulu https://api.botcahx.eu.org
 
 //INI OPTIONAL BOLEH DI ISI BOLEH JUGA ENGGA//
-global.lann = 'YOUR_APIKEY_HERE'
+global.lann = ''
 //Daftar https://api.betabotz.eu.org 
 
 //jangan diganti!
@@ -43,3 +64,4 @@ fs.watchFile(file, () => {
   delete require.cache[file]
   require(file)
 })
+  
