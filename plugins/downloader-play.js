@@ -4,7 +4,13 @@ let fetch = require('node-fetch');
 let handler = async (m, { conn, text, usedPrefix }) => })
     if (!text) throw 'Enter Title / Link From YouTube!';
     try {
-        m.reply("searching🔎. . . .");
+        conn.sendMessage(m.chat, {
+            react: {
+                text: '🔎',
+                key: m.key
+            }
+        });
+        m.reply("searching🔍. . . .");
         const look = await search(text);
         const convert = look.videos[0];
         if (!convert) throw 'Video/Audio Tidak Ditemukan';
@@ -24,8 +30,14 @@ let handler = async (m, { conn, text, usedPrefix }) => })
                 conn.reply(m.chat, eror, m)
                 return;
             }
+            conn.sendMessage(m.chat, {
+            react: {
+                text: '⏳',
+                key: m.key
+            }
+        });
  
-            await conn.sendMessage(m.chat, {
+            conn.sendMessage(m.chat, {
                 audio: {
                     url: audioUrl.result.mp3
                 },
