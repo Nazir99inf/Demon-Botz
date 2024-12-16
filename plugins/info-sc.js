@@ -4,7 +4,7 @@ let esce = `
 Hai ${ye} 
 \n– 乂 I N F O - S C R I P T*
 \n◦  Name : \n◦  Modules Type  : CjsxEsm \n◦  Format : Plugins\n◦  Total Features : 600+ \n◦  Price : 65.000  \n◦  Review Bot :
-\n https://chat.whatsapp.com/Fb1V5mV2qIKILLPXC66clV
+\n Chat me wa.me/6285822146627
 \n*– Support Pairing Code*\n*– Disk Used Average 700mb*\n*_ Bot Size 3mb*\n*– Clean Code*\n*– No Encrypt*\n*– Support Newsletter*
 
 
