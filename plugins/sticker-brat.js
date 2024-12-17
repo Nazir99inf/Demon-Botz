@@ -9,18 +9,30 @@ var handler = async (m, {
  usedPrefix, 
  command
  }) => {
+    conn.sendMessage(m.chat, {
+            react: {
+                text: '⏳',
+                key: m.key
+            }
+        });
     text = text ? text : m.quoted && m.quoted.text ? m.quoted.text : m.quoted && m.quoted.caption ? m.quoted.caption : m.quoted && m.quoted.description ? m.quoted.description : ''
-    if (!text) throw `Example : ${usedPrefix + command} Lagi Ruwet`
+    if (!text) throw `Example : ${usedPrefix + command} Hallo Word`
     const res = `https://api.siputzx.my.id/api/m/brat?text=${encodeURIComponent(text.substring(0, 151))}`
     var error = fs.readFileSync(`./media/sticker/emror.webp`)
     try {
         if (command == 'brat') {
             var stiker = await sticker5(res, { packname })
-            await conn.sendFile(m.chat, stiker, 'emror.webp', '', m)
+            conn.sendMessage(m.chat, {
+            react: {
+                text: '📖',
+                key: m.key
+            }
+        });
+            conn.sendFile(m.chat, stiker, 'emror.webp', '', m)
         }
     } catch (e) {
         console.log(e)
-        await conn.sendFile(m.chat, error, 'error.webp', '', m)
+        conn.sendFile(m.chat, error, 'error.webp', '', m)
     }
 }
 
@@ -28,3 +40,4 @@ handler.command = handler.help = ['brat']
 handler.tags = ['sticker']
 handler.limit = true
 module.exports = handler
+                                                                                
