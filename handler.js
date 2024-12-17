@@ -848,7 +848,7 @@ module.exports = {
                 isBannedTime: false,
                 mute: false,
                 listStr: {},
-                sWelcome: '乂 Welcome, @user!\nSelamat datang di grup: @subject\n\n Deskripsi @desc',
+                sWelcome: '*乂 Welcome,* @user!\n*Group Name :* @subject\n\n*Deskripsi :* @desc',
                 sBye: 'Selamat tinggal👋 @user!',
                 sPromote: '',
                 sDemote: '',
