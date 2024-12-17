@@ -59,14 +59,14 @@ Welcome to Dashboard Bot !
 
 *–  I N T R O  - D U C T I O N*
 
- my name is Demon
+ my name is Nazir
  your virtual assistant *( WhatsApp bot )*, who will help you in many ways on WhatsApp.
  
  –  *I N F O - B O T*
 
 ┌  ◦  Language : Javascript
-│  ◦  Library :@WhiskeySocket/baileys
-│  ◦  Wa-web Version :2, 3000, 1017531287
+│  ◦  Library : @WhiskeySockets/Baileys
+│  ◦  Wa-web Version : 2, 3000, 1017531287
 │  ◦  Time : %time
 │  ◦  Uptime : %uptime
 └  ◦  Browsers : Microsoft Edge(Windows)
@@ -77,7 +77,16 @@ Welcome to Dashboard Bot !
 │  ◦  Device : Android
 └  ◦  Status : Free User
 
-If you find a bug in this bot, please contact the bot owner.`.trimStart(),
+*– Papular - Ussing - Command - Bot*
+
+┌  ◦  1 : .qc
+│  ◦  2 : .play
+│  ◦  3 : .brat
+│  ◦  4 : .tiktok
+└  ◦  5 : .pin
+
+If you find a bug in this bot, please contact the bot owner.`
+.trimStart(),
     header: '┌⊑ *# %category* ⊒',
     body: '│⚡ %cmd %islimit %isPremium',
     footer: '└  ',
@@ -236,7 +245,7 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
 }
 handler.help = ['menu']
 handler.tags = ['main']
-handler.command = /^(menu|help)$/i
+handler.command = /^(menu|help|bot)$/i
 handler.exp = 3
 
 module.exports = handler
@@ -247,4 +256,4 @@ function clockString(ms) {
     let m = Math.floor(ms / 60000) % 60
     let s = Math.floor(ms / 1000) % 60
     return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-    }
+}
