@@ -9,19 +9,20 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
         m.reply(wait);      
 
         try {
-            const response = await axios.get(`https://api.siputzx.my.id/api/tiktok?url=${text}`);
+            const response = await axios.get(`https://api.botcahx.eu.org/api/dowloader/tiktok?url=${text}&apikey=${btc}`);
             const res = response.data.result;      
             var { video, title, title_audio, audio } = res;
             if (!video[0]) {
                 throw eror
             }
-            let capt = `乂 *T I K T O K   D O W N L O A D E R*\n\n`;
-            capt += `◦ *Title* : ${title}\n`;
-            capt += `\n`;   
+            let capt = `┌─⭓「 *乂 TIKTOK DOWNLOADER* 」*\n`;
+            capt += `│ *• Judu :* ${title}\n`;
+            capt += `│ *• File Type :* Video\n;
+            capt += `└────────⭓`;   
                  
             if (video.length > 1) {
                 for (let v of video) {
-                    conn.sendFile(m.chat, v, null, capt, m);
+                    await conn.sendFile(m.chat, v, null, capt, m);
                 }
             } else {
                 conn.sendFile(m.chat, video[0], null, capt, m);
