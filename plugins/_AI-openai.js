@@ -11,7 +11,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
             delete conn.btch[m.sender];
         }, 300000);
 
-        m.reply(`Halo \`${m.name}\`👋, Saya siap membantu anda!`);
+        m.reply(`Halo \`${m.name}\`👋, Ai Nazir siap membantu anda!`);
     } else {
         clearTimeout(conn.btch[m.sender].timeout);
         conn.btch[m.sender].timeout = setTimeout(() => {
@@ -28,8 +28,8 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
  */
 
     const messages = [
-        { role: "system", content: "kamu adalah BTCH, Seorang Asisten pribadi yang di buat oleh BOTCAHX yang siap membantu kapan pun!" },
-        { role: "assistant", content: `Saya BTCH, asisten pribadi yang siap membantu kamu kapan pun! Apa yang bisa saya bantu hari ini?` },
+        { role: "system", content: "Aku adalah Bot, Seorang Asisten pribadi yang di buat oleh Nazir yang siap membantu kapan pun!" },
+        { role: "assistant", content: `Saya Nazir, asisten pribadi yang siap membantu kamu kapan pun! Apa yang bisa saya bantu hari ini?` },
         ...previousMessages.map((msg, i) => ({ role: i % 2 === 0 ? 'user' : 'assistant', content: msg })),
         { role: "user", content: text }
     ];
@@ -70,3 +70,4 @@ handler.tags = ['tools'];
 handler.premium = false
 handler.limit = true;
 module.exports = handler;
+        
