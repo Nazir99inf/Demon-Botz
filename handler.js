@@ -1115,7 +1115,7 @@ module.exports = {
                                 console.error(e)
                             }
                         }
-                        if (m.limit) m.reply(+ m.limit + ' Limit terpakai')
+                        if (m.limit) m.reply(+ m.limit + ' Energy/Limit tepakai')
                    }
                     break
                 }
@@ -1195,9 +1195,9 @@ module.exports = {
                             title: "Notification Welcome/Lave",
                             body: '© Nazir',
                             thumbnailUrl: pp,
-                            sourceUrl: 'https://wa.me/6285822146627?text=hallo+word',
-                            mediaType: 1,
-                            renderLargerThumbnail: true 
+                            sourceUrl: '',
+                            mediaType: 0,
+                            renderLargerThumbnail: false 
                             }}}, { quoted: null })
                         }
                     }
@@ -1236,7 +1236,7 @@ Untuk mematikan fitur ini, ketik
 
 global.dfail = (type, m, conn) => {
     let msg = {
-        rowner: 'Perintah ini hanya dapat digunakan oleh _*OWWNER!1!1!*_',
+        rowner: '',
         owner: 'Perintah ini hanya dapat digunakan oleh _*Owner Bot*_!',
         mods: 'Perintah ini hanya dapat digunakan oleh _*Moderator*_ !',
         premium: 'Perintah ini hanya untuk member _*Premium*_ !',
