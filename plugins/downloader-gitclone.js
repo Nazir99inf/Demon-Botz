@@ -1,23 +1,35 @@
-let regex = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
-let fetch = require('node-fetch')
-let handler = async (m, { args, usedPrefix, command }) => {
+const regex = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i;
 
-    if (!args[0]) throw 'link githubnya mana? contoh: https://github.com/BOTCAHX/RTXZY-MD'
-
-    if (!regex.test(args[0])) throw 'link salah!'
-
-    let [, user, repo] = args[0].match(regex) || []
-    repo = repo.replace(/.git$/, '')
-    let url = `https://api.github.com/repos/${user}/${repo}/zipball`
-    	let filename = (await fetch(url, { method: 'HEAD' })).headers.get('content-disposition').match(/attachment; filename=(.*)/)[1]
-		m.reply(wait)
-		await conn.sendMessage(m.chat, { document: { url: url }, mimetype: 'application/zip', fileName: filename.replace('.zip.zip','.zip')}, { quoted : m })
-
+async function isUrl(url) {
+  return url.match(
+    new RegExp(
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/,
+      "gi",
+    ),
+  );
 }
-handler.help = ['gitclone <url>']
-handler.tags = ['github']
-handler.command = /gitclone/i
+let handler = async (m, { conn, text, args, usedPrefix, command }) => {
+  if (!text) throw `*• Example:* ${usedPrefix + command} *[url github]*`;
+  m.reply(wait);
+  if (!isUrl(args[0]) && !args[0].includes("github.com"))
+    return m.reply(`*[ ! ] invalid url github*`);
+  let [, user, repo] = args[0].match(regex) || [];
+  repo = repo.replace(/.git$/, "");
+  let url = `https://api.github.com/repos/${user}/${repo}/zipball`;
+  let name = `${encodeURIComponent(repo)}.zip`;
+  conn.sendMessage(
+    m.chat,
+    {
+      document: { url: url },
+      fileName: name,
+      caption: `*[ ✓ ] Result from:* ${text}`,
+      mimetype: "application/zip",
+    },
+    { quoted: m },
+  );
+};
+handler.help = ["gitclone"].map((a) => a + " *[url github]*");
+handler.tags = ["downloader"];
+handler.command = ["gitclone"];
 
-handler.limit = true
-
-module.exports = handler
+module.exports = handler;
