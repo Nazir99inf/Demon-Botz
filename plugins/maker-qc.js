@@ -2,6 +2,12 @@ let { sticker5 } = require('../lib/sticker.js')
 let axios = require('axios')
 
 let handler = async (m, { conn, args }) => {
+conn.sendMessage(m.chat, {
+            react: {
+                text: '⏳',
+                key: m.key
+            }
+        });
 let text
     if (args.length >= 1) {
         text = args.slice(0).join(" ")
@@ -44,6 +50,12 @@ let apiColor = randomColor[Math.floor(Math.random() * randomColor.length)];
       }
    })
    const buffer = Buffer.from(json.data.result.image, 'base64')
+   conn.sendMessage(m.chat, {
+            react: {
+                text: '🔖',
+                key: m.key
+            }
+        });
    let stiker = await sticker5(buffer, false, global.packname, global.author)
     if (stiker) return conn.sendFile(m.chat, stiker, 'Quotly.webp', '', m)
 }
@@ -54,3 +66,4 @@ handler.command = /^(qc|quotely)$/i
 handler.limit = true;
 
 module.exports = handler
+       
