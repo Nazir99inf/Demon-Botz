@@ -24,7 +24,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 };
 
 handler.help = ['pindl'];
-handler.command = /^(pindl|pin)$/i;
+handler.command = /^(pindl|pindownloader|pinrest)$/i;
 handler.tags = ['downloader'];
 handler.limit = true;
 handler.premium = false;
