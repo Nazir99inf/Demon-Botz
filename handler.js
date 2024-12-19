@@ -940,7 +940,7 @@ module.exports = {
             let user = (m.isGroup ? participants.find(u => conn.decodeJid(u.id) === m.sender) : {}) || {} // User Data
             let bot = (m.isGroup ? participants.find(u => conn.decodeJid(u.id) == this.user.jid) : {}) || {} // Your Data
             let isAdmin = user && user.admin || false // Is User Admin?
-            let isBotAdmin = bot && bot.admin || false // Are you Admin?
+            let isBotAdmin = bot && bot.admin || true // Are you Admin?
             for (let name in global.plugins) {
                 let plugin = global.plugins[name]
                 if (!plugin) continue
@@ -1064,7 +1064,7 @@ module.exports = {
                         continue // Limit habis
                     }
                     if (plugin.level > _user.level) {
-                        this.reply(m.chat, `diperlukan level ${plugin.level} untuk menggunakan perintah ini. Level kamu ${_user.level}\m gunakan .levelup untuk menaikan level!`, m)
+                        this.reply(m.chat, `diperlukan level ${plugin.level} untuk menggunakan perintah ini. Level kamu ${_user.level}\n gunakan .levelup untuk menaikan level!`, m)
                         continue // If the level has not been reached
                     }
                     let extra = {
@@ -1115,7 +1115,7 @@ module.exports = {
                                 console.error(e)
                             }
                         }
-                        if (m.limit) m.reply(+ m.limit + ' Energy/Limit tepakai')
+                        if (m.limit) m.reply('┌ ◦ 1 ⚡Energy/Limit tepakai\n└ ◦'+ db.data.users[m.sender].limit + ' Tersisa')
                    }
                     break
                 }
@@ -1217,7 +1217,7 @@ module.exports = {
         }
     },
     async delete({ remoteJid, fromMe, id, participant }) {
-        /*if (fromMe) return
+        if (fromMe) return
         let chats = Object.entries(conn.chats).find(([user, data]) => data.messages && data.messages[id])
         if (!chats) return
         let msg = JSON.parse(chats[1].messages[id])
@@ -1230,24 +1230,66 @@ Untuk mematikan fitur ini, ketik
 `.trim(), msg, {
             mentions: [participant]
         })
-        this.copyNForward(msg.key.remoteJid, msg).catch(e => console.log(e, msg))*/
+        this.copyNForward(msg.key.remoteJid, msg).catch(e => console.log(e, msg))
     }
 }
 
 global.dfail = (type, m, conn) => {
     let msg = {
-        rowner: '',
-        owner: 'Perintah ini hanya dapat digunakan oleh _*Owner Bot*_!',
-        mods: 'Perintah ini hanya dapat digunakan oleh _*Moderator*_ !',
-        premium: 'Perintah ini hanya untuk member _*Premium*_ !',
-        group: 'Perintah ini hanya dapat digunakan di grup!',
-        private: 'Perintah ini hanya dapat digunakan di Chat Pribadi!',
-        admin: 'Perintah ini hanya untuk *Admin* grup!',
-        botAdmin: 'Jadikan bot sebagai *Admin* untuk menggunakan perintah ini!',
-        unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Mansur.16*',
-        restrict: 'Fitur ini di *disable*!'
-    }[type]
-    if (msg) return m.reply(msg)
+      owner:  `┌─⭓「 *NAZIR ONLY* 」
+│ *• Msg :* this feature only for Nazir/Developer!
+└───────────────⭓`,
+      mods:  `┌─⭓「 *MODERATOR ONLY* 」
+│ *• Msg :* this feature only for moderator bot!
+└───────────────⭓`,
+      group:  `┌─⭓「 *GROUP ONLY* 」
+│ *• Msg :* sorry this features only used in Group chat
+└───────────────⭓`,
+      private:  `┌─⭓「 *PRIVATE ONLY* 」
+│ *• Msg :* sorry this features only used in Private chat
+└───────────────⭓`,
+      admin: `┌─⭓「 *ADMIN ONLY* 」
+│ *• Msg :* this feature only for admin group!
+└───────────────⭓`,
+      botAdmin: `┌─⭓「 *BOT NOT ADMIN* 」
+│ *• Msg :* Promote bot to admin before use this command!
+└───────────────⭓`,
+      block: `┌─⭓「 *BLOCK COMAMAND* 」
+│ *• Msg :* sorry command has been blocked !
+└───────────────⭓`,
+      unreg: `┌─⭓「 *REGISTER BEFORE USING BOT* 」
+│ • .daftar your_name.29
+│ • .regmail youremail@gmail.com
+└───────────────⭓
+if you first register on this bot you 
+will get additional rewards !
+
+* *Limit :* +10
+* *Money :* +10000`,
+      premium:  `┌─⭓「 *PREMIUM ONLY* 」
+│ *• Msg :* this feature only for premium bot!
+└───────────────⭓
+
+Type *.buyprem* for buying premium bot`,
+    }[type];
+    if (msg)
+      return conn.sendMessage(
+        m.chat,
+        {
+          text: msg,
+          contextInfo: {
+            externalAdReply: {
+              title: "Access Denied !",
+              body: "Nazir 2024 - 2025",
+              thumbnailUrl: "https://pomf2.lain.la/f/1r7dcmcn.png",
+              sourceUrl: null,
+              mediaType: 1,
+              renderLargerThumbnail: true,
+            },
+          },
+        },
+        { quoted: m },
+      );
 }
 
 let fs = require('fs')
