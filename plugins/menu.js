@@ -62,23 +62,26 @@ Welcome to Dashboard Bot !
  my name is Nazir
  your virtual assistant *( WhatsApp bot )*, who will help you in many ways on WhatsApp.
  
- –  *I N F O - B O T*
 
-┌  ◦  Language : Javascript
+┌─⭓「 *–  I N F O - B O T* 」
+│  ◦  Language : Javascript
 │  ◦  Library : @WhiskeySockets/Baileys
-│  ◦  Wa-web Version : 2, 3000, 1017531287
+│  ◦  Runing On : %run
+│  ◦  Version Node : %node
 │  ◦  Time : %time
-│  ◦  Uptime : %uptime
-└  ◦  Browsers : Microsoft Edge(Windows)
+│  ◦  Runtime : %uptime
+│  ◦  Browsers : Microsoft Edge(Windows)
+└────────⭓🤖
 
-*– I N F O - U S E R*
 
-┌  ◦  Name : %name
+┌─⭓「 *– I N F O - U S E R* 」
+│  ◦  Name : %namkon
 │  ◦  Device : Android
-└  ◦  Status : Free User
+│  ◦  Limit : %lim Limit Tersisa
+│  ◦  Status : %stat
+└────────⭓👑
 
 *– Papular - Ussing - Command - Bot*
-
 ┌  ◦  1 : .qc
 │  ◦  2 : .play
 │  ◦  3 : .brat
@@ -97,6 +100,11 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
     try {
         let package = JSON.parse(await fs.promises.readFile(path.join(__dirname, '../package.json')).catch(_ => '{}'))
         let { exp, limit, level, role } = global.db.data.users[m.sender]
+        let run = process.env.USER == "root" ? "vps" : process.env.USER === "container" ? "panel" : "Hosting/local"
+        let node = process.version
+        let namkon = m.name
+        let stat = !db.data.users[m.sender].registered ? "Not Registered" : global.owner.includes(m.sender.split("@")[0]) ? "Developer Bot" : db.data.users[m.sender].premium ? "Premium User" : "Free User"
+        let lim = global.db.data.users[m.sender].limit
         let { min, xp, max } = levelling.xpRange(level, global.multiplier)
         let name = `@${m.sender.split`@`[0]}`
         let teks = args[0] || ''
@@ -140,7 +148,12 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
                 '%': '%',
                 p: _p, 
                 uptime,
-                name, 
+                stat,
+                node,
+                run,
+                namkon,
+                name,
+                lim, 
                 date,
                 time
             }
@@ -154,11 +167,12 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
                 contextInfo: {
                     mentionedJid: [m.sender],
                     externalAdReply: {
-                        title: date,
+                        title: 'WonYoung - WhatsaappBotz (©Nazir)',
+                        body: '© YouKnowZir / Nazir⚡',
                         mediaType: 1,
                         previewType: 0,
                         renderLargerThumbnail: true,
-                        thumbnailUrl: 'https://api.betabotz.eu.org/api/tools/get-upload?id=f/oz8ts760.jpg',
+                        thumbnailUrl: 'https://i.pinimg.com/originals/00/0c/e1/000ce19bb72a599ec9814387745016dc.jpg',
                         sourceUrl: 'https://chat.whatsapp.com/Fb1V5mV2qIKILLPXC66clV'
                     }
                 }, 
@@ -171,6 +185,7 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
         if (!allTags[teks]) {
             return m.reply(`Menu "${teks}" tidak tersedia.\nSilakan ketik ${_p}menu untuk melihat daftar menu.`)
         }
+        
 
         let menuCategory = defaultMenu.before + '\n\n'
         
@@ -212,7 +227,12 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
         let replace = {
             '%': '%',
             p: _p, 
-            uptime, 
+            uptime,
+            stat,
+            run,
+            namkon,
+            node,
+            lim, 
             name,
             date,
             time
@@ -227,11 +247,12 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
                 contextInfo: {
                     mentionedJid: [m.sender],
                     externalAdReply: {
-                        title: date,
+                        title: 'WonYoung - WhatsaappBotz (©Nazir⚡)',
+                        body: '© YouKnowZir / Nazir⚡',
                         mediaType: 1,
                         previewType: 0,
                         renderLargerThumbnail: true,
-                        thumbnailUrl: 'https://api.betabotz.eu.org/api/tools/get-upload?id=f/oz8ts760.jpg',
+                        thumbnailUrl: 'https://i.pinimg.com/originals/00/0c/e1/000ce19bb72a599ec9814387745016dc.jpg',
                         sourceUrl: 'https://chat.whatsapp.com/Fb1V5mV2qIKILLPXC66clV'
                     }
                 }, 
@@ -256,4 +277,5 @@ function clockString(ms) {
     let m = Math.floor(ms / 60000) % 60
     let s = Math.floor(ms / 1000) % 60
     return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-}
+    }
+        
