@@ -1,4 +1,4 @@
-**😼 WonYoung Botz | Laetest** | ***create by YouKnowZir***
+**JangWonYoung Botz | Laetest** | ***create by YouKnowZir***
 
 ```> Simple WhatsApp bot Using Library Baileys```
 
