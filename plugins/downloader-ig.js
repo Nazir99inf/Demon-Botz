@@ -1,26 +1,30 @@
-const fetch = require("node-fetch")
-const util = require("util")
+const fetch = require('node-fetch')
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-    if (!args[0]) throw `Use example ${usedPrefix}${command} https://www.instagram.com/p/ByxKbUSnubS/?utm_source=ig_web_copy_link`
-    m.reply(wait)
-     const url = args[0];
-     let re = await fetch(`https://api.betabotz.eu.org/api/download/igdowloader?url=${url}&apikey=${lann}`)
-     let message = await re.json()  
-    try {             
-        for (let i of message.message ) {
-            conn.sendFile(m.chat, i._url, null, `─⭓「 *INSTAGRAM DOWNLOADER* 」\n│ *• TYPE :* Video\n└────────⭓`, m)
+    if (!args[0]) throw `*Contoh:* ${usedPrefix}${command} https://www.instagram.com/p/ByxKbUSnubS/?utm_source=ig_web_copy_link`
+
+    try {
+        const api = await fetch(`https://api.botcahx.eu.org/api/dowloader/igdowloader?url=${args[0]}&apikey=${btc}`)
+        const res = await api.json()
+
+        const limitnya = 3; // ini jumlah foto yang ingin di kirim ke user (default 3 foto)
+
+        for (let i = 0; i < Math.min(limitnya, res.result.length); i++) {
+            await sleep(3000)
+            conn.sendFile(m.chat, res.result[i].url, null, `┌─⭓「 *INSTAGRAM DOWNLOADER* 」\n│ *• File Type :* Video\n└────────⭓`, m)
         }
-    } catch(err) {
-        m.reply(`${eror}`)
+    } catch (e) {
+        throw `*Server Down!*`
     }
 }
 
-handler.help = ['ig'].map(v => v + ' <url>')
+handler.help = ['instagram'].map(v => v + ' <url>')
 handler.tags = ['downloader']
-handler.command = /^(Instagram|ig|igdl|igstory)$/i
+handler.command = /^(ig|instagram|igdl|instagramdl|igstroy)$/i
 handler.limit = true
 
 module.exports = handler
 
-let fetch = require('node-fetch')
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
