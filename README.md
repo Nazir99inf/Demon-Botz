@@ -88,15 +88,4 @@ node index.js --pairing
 [Tio](https://github.com/BOTCAHX)  | [Erlan](https://github.com/ERLANRAHMAT)
 Recode | Contributor |
 
-##### Special Thanks To
-<!--[![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo)
-[![BochilGaming](https://github.com/BochilGaming.png?size=100)](https://github.com/BochilGaming)
-[![adiwajshing/Baileys](https://github.com/adiwajshing.png?size=100)](https://github.com/adiwajshing)-->
-<a href="https://github.com/BochilGaming"><img src="https://github.com/BochilGaming.png?size=100" width="100" height="100"></a> | [![NURUTOMO](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo) 
----|---
-[Bochilgaming](https://github.com/BochilGaming)  | [Nurutomo](https://github.com/Nurutomo)
-Sepuh | Sepuh |
 
-
-## Stargazers over time
-[![Stargazers over time](https://starchart.cc/BOTCAHX/RTXZY-MD.svg?background=%23FFFFFF&axis=%23333333&line=%23e76060)](https://starchart.cc/BOTCAHX/RTXZY-MD)
