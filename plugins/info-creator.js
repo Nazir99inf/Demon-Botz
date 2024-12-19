@@ -1,51 +1,39 @@
-var name = global.nameowner
-var numberowner = global.numberowner
-var gmail = global.mail
-const { 
-default: 
-makeWASocket,
-BufferJSON,
-WA_DEFAULT_EPHEMERAL, 
-generateWAMessageFromContent, 
-downloadContentFromMessage, 
-downloadHistory, 
-proto,
-getMessage, 
-generateWAMessageContent, 
-prepareWAMessageMedia 
-} = require("@adiwajshing/baileys");
-var handler = async (m, {
-conn
-}) => {
-const vcard = `BEGIN:VCARD
-VERSION:3.0
-N:Sy;Bot;;;
-FN: ${name}
-item.ORG: Creator Bot
-item1.TEL;waid=${numberowner}:${numberowner}@s.whatsapp.net
-item1.X-ABLabel:Nomor Creator Bot 
-item2.EMAIL;type=INTERNET:${gmail}
-item2.X-ABLabel:Email Owner
-item3.ADR:;;🇮🇩 Indonesia;;;;
-item3.X-ABADR:ac
-item4.EMAIL;type=INTERNET:support@tioprm.eu.org
-item4.X-ABLabel:Email Developer 
-item3.ADR:;;🇮🇩 Indonesia;;;;
-item3.X-ABADR:ac 
-item5.URL:${instagram}
-item5.X-ABLabel:Website
-END:VCARD`
-const sentMsg  = await conn.sendMessage(
+let moment = require("moment-timezone");
+let PhoneNum = require("awesome-phonenumber");
+let regionNames = new Intl.DisplayNames(["en"], {
+  type: "region",
+});
+
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+  let nomor = global.owner;
+  let array = [];
+  for (let i of nomor) {
+    let nama = await conn.getName(i + "@s.whatsapp.net");
+    array.push([i, nama]);
+  }
+
+  let caption = `*[ BERIKUT ADALAH CREATOR SAYA ]*
+${global.owner.map((a, i) => `*${i + 1}.* @` + a + " *[" + " " + conn.getName(a + "@s.whatsapp.net") + "]*").join("\n")}
+
+*[ INFORMATION ]*
+> • _Jangan Spam nomor Owner *[ Sanksi Blokir/Virtex ]*_
+> • _Jangan Call Nomor Owner *[ Sanksi Blokir/Virtex ]*_`;
+
+  let reply = await conn.sendContact(m.chat, array, m);
+  await conn.sendMessage(
     m.chat,
-    { 
-        contacts: { 
-            displayName: 'CN', 
-            contacts: [{ vcard }] 
-        }
-    }
-)
-await conn.reply(m.chat, "Itu Adalah nomor owner Bot", sentMsg)}
-handler.command = handler.help = ['owner', 'creator'];
-handler.tags = ['info'];
-handler.limit = false;
+    {
+      text: caption,
+      mentions: conn.parseMention(caption),
+    },
+    {
+      quoted: reply,
+    },
+  );
+};
+
+handler.help = ["owner", "creator"].map((a) => a + " *[Contact Owner]*");
+handler.tags = ["info"];
+handler.command = ["owner", "creator"];
+
 module.exports = handler;
