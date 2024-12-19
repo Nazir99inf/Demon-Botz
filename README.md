@@ -3,15 +3,14 @@
 **Update :**
 ----
 - Update Menu jadi lebih simple dalam penggunaan nya
+- Menu Game
 - Add Game RPG 
 - Menggunakan baileys 6.7.8
 - Support *QR* dan *Pairing* Code *Command:*
   ```bash
    node index.js --pairing
   ``` 
-- Fitur 95% implementasi dari website api
-  
-- Informasi api & update script [WhatsApp](https://whatsapp.com/channel/0029Va8ZH8fFXUuc69TGVw1q)
+- Fitur 95% implementasi dari website api  
 
 
 ----
