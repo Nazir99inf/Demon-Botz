@@ -905,7 +905,17 @@ module.exports = {
             if (opts['nyimak']) return
             if (!m.fromMe && opts['self']) return
             if (opts['pconly'] && m.chat.endsWith('g.us')) return
-            if (opts['gconly'] && !m.chat.endsWith('g.us')) return
+            if (opts["gconly"] && !m.fromMe && !m.chat.endsWith("g.us") && !isOwner && !isPrems) {
+         let cap = `*– Bot tidak dapat diakses di private chat*
+Maaf Hanya pengguna premium saja yang dapat mengakses firur di Private bot jika kamu melihat pesan ini berarti kamu hanya pengguna gratis 
+
+Tapi tenang kamu masih bisa akses bot ini di Kominitas AkiraaBot 
+Kamu dapat akses fitur downloader, game, play, ai, dan lain lain sekarang jika bergabung 
+
+*– Bergabung Sekarang :*
+https://chat.whatsapp.com/KskX64Csz7TCsUmEz0Reoh`
+          m.reply(cap);
+	    };
             if (opts['swonly'] && m.chat !== 'status@broadcast') return
             if (typeof m.text !== 'string') m.text = ''
             if (opts['queque'] && m.text) {
@@ -1288,7 +1298,7 @@ Type *.buyprem* for buying premium bot`,
             },
           },
         },
-        { quoted: m },
+        { quoted: null },
       );
 }
 
