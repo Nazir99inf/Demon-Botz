@@ -9,7 +9,7 @@ let handler = async (m, { usedPrefix, command, conn, args }) => {
     let limit = Math.min(5, data.result.length);
     for(let i = 1; i < limit; i++) { 
       await sleep(3000);
-      conn.sendFile(m.chat, data.result[i], 'pin.jpg', `─⭓「 *Pin Search 5Photos* 」\n│ *• TYPE :* Image\n│ *• Kecepatan :* ${((new Date - old) * 1)} ms\n└────────⭓`, m);
+      conn.sendFile(m.chat, data.result[i], 'pin.jpg', `┌─⭓「 *Pin Search Photos* 」\n│ *• TYPE :* Image\n│ *• Kecepatan :* ${((new Date - old) * 1)} ms\n└────────⭓`, m);
     }
   } catch (e) {
     throw `${eror}`;
@@ -24,4 +24,4 @@ module.exports = handler;
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
+}
