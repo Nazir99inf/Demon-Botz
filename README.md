@@ -18,31 +18,6 @@
 - Fitur 95% implementasi dari website api  
 
 
-----
-  ## Note!
-  **Important :**
-  
-- Untuk menggunakan bot ini, kamu diwajibkan mengisi ```Apikey``` terlebih dahulu, Jika tidak mengisinya maka bot tidak akan berfungsi dengan baik.
-- Tidak disarankan menginstal bot ini di termux atau panel yang tidak mempunyai kelengkapan ffmpeg, imagemagick, webp atau panel yang tidak support express.js
-  
-- Menggunakan 95% fitur dari [`RestApi`](https://api.botcahx.eu.org)  
-
-----
-**Apikey :**
-- [✓] Free ApiKey 15 Request per/day
-- [ + ] Recommendation to upgrade limit to premium (for 1 month)
-- Jika ingin membeli ```Apikey``` Premium silahkan register lalu pilih paket yang di inginkan [`Pilih`](https://api.botcahx.eu.org/price)
-
-**Website Api :**
-- BOTCAHX [`Register`](https://api.botcahx.eu.org)
-- Lann [`Optional Register`](https://api.betabotz.eu.org) 
-- Setelah mendapatkan apikey silahkan paste di config.js pada bagian ```global.btc``` dan sebagai optional kamu bisa juga mengisi ```global.lann```
----
-
-## Support me 
-
-<a href="https://sociabuzz.com/tioclkp02" target="_blank"><img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" height="32px" alt="Sociabuzz"></a>
-
 
 ### `Render`
 
@@ -69,8 +44,7 @@ Original base [`Link`](https://github.com/HelgaIlham/ZukaBet)
 * Unduh & Instal ImageMagick [`Klik Disini`](https://imagemagick.org/script/download.php)
 
 ```bash
-git clone https://github.com/BOTCAHX/RTXZY-MD
-cd RTXZY-MD
+git clone https://github.com/Nazir99inf/WonyoungBotz
 npm i
 node index.js
 ```
@@ -80,12 +54,4 @@ node index.js
 node index.js --pairing
 
 ```
-
-
-##### All Contributors
-<a href="https://github.com/BOTCAHX"><img src="https://github.com/BOTCAHX.png?size=100" width="100" height="100"></a> | [![Erlan](https://github.com/ERLANRAHMAT.png?size=100)](https://github.com/ERLANRAHMAT) 
----|---
-[Tio](https://github.com/BOTCAHX)  | [Erlan](https://github.com/ERLANRAHMAT)
-Recode | Contributor |
-
 
