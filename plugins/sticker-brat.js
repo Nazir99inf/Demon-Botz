@@ -1,82 +1,54 @@
-const axios = require("axios");
-const { execSync } = require("child_process");
-const fs = require("fs");
-const path = require("path");
+const axios = require('axios');
+const fs = require('fs');
 
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) {
-    return m.reply(`*• Example :* ${usedPrefix + command} *[input text]*`);
-  }
-  try {
-    conn.sendMessage(m.chat, {
+const handler = async (m, {
+    conn,
+    text,
+    usedPrefix
+}) => {
+    if (!text) throw `Gunakan perintah ini dengan format: ${usedPrefix}brat <teks>`;
+
+    try {
+        conn.sendMessage(m.chat, {
             react: {
                 text: '⏳',
                 key: m.key
             }
         });
-    const words = text.split(" ");
-    const tempDir = path.join(process.cwd(), "tmp");
-    if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir);
-    const framePaths = [];
 
-    for (let i = 0; i < words.length; i++) {
-      const currentText = words.slice(0, i + 1).join(" ");
+        const url = `https://siputzx-bart.hf.space/?q=${encodeURIComponent(text)}`;
+        const response = await axios.get(url, {
+            responseType: 'arraybuffer'
+        });
+        const tempFilePath = `./temp_${new Date().getTime()}.jpg`;
 
-      const res = await axios
-        .get(
-          `https://api.siputzx.my.id/api/m/brat?text=${encodeURIComponent(currentText)}`,
-          {
-            responseType: "arraybuffer",
-          },
-        )
-        .catch((e) => e.response);
-
-      const framePath = path.join(tempDir, `frame${i}.mp4`);
-      fs.writeFileSync(framePath, res.data);
-      framePaths.push(framePath);
-    }
-
-    const fileListPath = path.join(tempDir, "filelist.txt");
-    let fileListContent = "";
-
-    for (let i = 0; i < framePaths.length; i++) {
-      fileListContent += `file '${framePaths[i]}'\n`;
-      fileListContent += `duration 0.5\n`; // Durasi setiap frame 500 milidetik
-    }
-
-    fileListContent += `file '${framePaths[framePaths.length - 1]}'\n`;
-    fileListContent += `duration 3\n`; // Frame terakhir memiliki durasi 3 detik
-
-    fs.writeFileSync(fileListPath, fileListContent);
-
-    const outputVideoPath = path.join(tempDir, "output.mp4");
-    execSync(
-      `ffmpeg -y -f concat -safe 0 -i ${fileListPath} -vf "fps=30" -c:v libx264 -preset veryfast -pix_fmt yuv420p -t 00:00:10 ${outputVideoPath}`,
-    );
-   
-     conn.sendMessage(m.chat, {
+        // Simpan gambar sementara
+        fs.writeFileSync(tempFilePath, response.data);
+ conn.sendMessage(m.chat, {
             react: {
-                text: '💌',
+                text: '🎉',
                 key: m.key
             }
         });
 
-    conn.sendImageAsSticker(m.chat, outputVideoPath, m, {
-      packname: global.packname,
-      author: global.author,
-    });
+        // Kirim sebagai stiker
+        await conn.sendImageAsSticker(m.chat, tempFilePath, m, {
+            packname: global.packname || 'Stiker By',
+            author: global.author || 'Mahiru - MultiDevice',
+        });
 
-    framePaths.forEach((filePath) => fs.unlinkSync(filePath));
-    fs.unlinkSync(fileListPath);
-    fs.unlinkSync(outputVideoPath);
-  } catch (err) {
-    console.error(err);
-    m.reply("Maaf, terjadi kesalahan saat memproses permintaan.");
-  }
+        // Hapus file sementara
+        await fs.unlinkSync(tempFilePath);
+
+    } catch (error) {
+        console.error('Error:', error);
+        await conn.reply(m.chat, 'Maaf, terjadi kesalahan saat mencoba membuat stiker brat. Coba lagi nanti.', m);
+    }
 };
 
-handler.help = ["brat"].map((a) => a + " *[text]*");
-handler.tags = ["sticker"];
-handler.command = ["brat"];
+handler.help = ['bratv1'].map((a) => a + " *[text]*");
+handler.tags = ['sticker'];
+handler.command = /^brat|bratv1$/i;
+handler.limit = true;
 
 module.exports = handler;
