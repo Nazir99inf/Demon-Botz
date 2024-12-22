@@ -52,7 +52,7 @@ let apiColor = randomColor[Math.floor(Math.random() * randomColor.length)];
    const buffer = Buffer.from(json.data.result.image, 'base64')
    conn.sendMessage(m.chat, {
             react: {
-                text: '🔖',
+                text: '🎉',
                 key: m.key
             }
         });
@@ -63,7 +63,7 @@ let apiColor = randomColor[Math.floor(Math.random() * randomColor.length)];
 handler.help = ['qc'];
 handler.tags = ['sticker'];
 handler.command = /^(qc|quotely)$/i
-handler.limit = true;
+handler.limit = 2;
 
 module.exports = handler
        
