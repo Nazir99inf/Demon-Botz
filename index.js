@@ -30,7 +30,7 @@ async function startServer() {
       res.setHeader('Content-Type', 'application/json');
       const data = {
         status: 'true',
-        message: 'Demon Botz Sucses Conecting',
+        message: 'WonYoungBotz Succses By Nazir',
         author: 'Nazir'
       };
       const result = {
